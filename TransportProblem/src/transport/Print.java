@@ -13,7 +13,7 @@ public class Print {
     public static void PrintTable(Table table) {
         int[] srcWeights = table.getSrcWeights();
         int[] dstWeights = table.getDstWeights();
-        Cell[][] cells = table.getTable();
+        Cell[][] cells = table.getCells();
         List<String> labels = new ArrayList<>(IntStream.range(0, dstWeights.length)
                 .mapToObj(i -> "B" + (i + 1) + "/" + dstWeights[i]).toList());
         labels.add(0, "Пост/Маг");

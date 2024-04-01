@@ -10,26 +10,27 @@ import java.util.stream.IntStream;
  *  Класс таблицы плана
  */
 public class Table {
-    protected int[] srcWeights;
-    protected int[] dstWeights;
-    protected int[][] costs;
-    private Cell[][] table;
-    private Plan plan;
+    private int[] srcWeights;
+    private int[] dstWeights;
+    private int[][] costs;
+    private Cell[][] cells;
     public Table(int[] srcWeights, int[] dstWeights, int[][] costs) {
         this.srcWeights = srcWeights;
         this.dstWeights = dstWeights;
         this.costs = costs;
+        this.cells = EmptyTable();
     }
-    public Cell[][] getTable() {
-        return table;
+    public Cell[][] getCells() {
+        return cells;
     }
-    public void CreateTable() {
-        this.table = EmptyTable();
+    public int[] getSrcWeights() {
+        return srcWeights;
     }
-    /** Создание опорного плана задачи */
-    public void CreatePlan() {
-        this.plan = new Plan(srcWeights, dstWeights, costs, table);
-        plan.CreateSourcePlan();
+    public int[] getDstWeights() {
+        return dstWeights;
+    }
+    public int[][] getCosts() {
+        return costs;
     }
     /** Инициализация опорной таблицы */
     private Cell[][] EmptyTable() {
@@ -38,10 +39,12 @@ public class Table {
         if (srcTotal > dstTotal) {
             // Фиктивный потребитель
             CreateFictDst(srcTotal - dstTotal);
+            System.out.printf("Добавлен фиктивный потребитель: B%d = %d%n", dstWeights.length, srcTotal - dstTotal);
         }
         if (srcTotal < dstTotal) {
             // Фиктивный поставщик
             CreateFictSrc(dstTotal - srcTotal);
+            System.out.printf("Добавлен фиктивный поставщик: A%d = %d%n", srcWeights.length, dstTotal - srcTotal);
         }
         Cell[][] table = new Cell[srcWeights.length][dstWeights.length];
         for (int i = 0; i < srcWeights.length; i++) {
@@ -76,21 +79,5 @@ public class Table {
         }
         costs = newCosts;
     }
-    /** Вывод таблицы в консоль */
-    public void PrintTable() {
-        List<String> labels = new ArrayList<>(IntStream.range(0, dstWeights.length)
-                .mapToObj(i -> "B" + (i + 1) + "/" + dstWeights[i]).toList());
-        labels.add(0, "Пост/Маг");
-        List<List<String>> params = new ArrayList<>();
-        for (int i = 0; i < srcWeights.length; i++) {
-            List<String> row = new ArrayList<>(Collections.singleton("A" + (i + 1) + "/" + srcWeights[i]));
-            for (Cell cell : table[i]) {
-                String value = (cell.isHasTraffic()) ? String.valueOf(cell.getTraffic()) : "-";
-                row.add(value + "|" + cell.getCost());
-            }
-            params.add(row);
-        }
-        utils.Table.PrintTable(labels.size(), labels, params,
-                "Исходный опорный план", Collections.nCopies(labels.size(), 10));
-    }
+
 }
