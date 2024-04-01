@@ -11,8 +11,15 @@ class Cell {
         this.traffic = traffic;
         this.hasTraffic = true;
     }
+    public int getCost() {
+        return cost;
+    }
     public int getTraffic() {
         return traffic;
+    }
+    public void removeTraffic() {
+        this.traffic = 0;
+        this.hasTraffic = false;
     }
     public boolean isHasTraffic() {
         return hasTraffic;
