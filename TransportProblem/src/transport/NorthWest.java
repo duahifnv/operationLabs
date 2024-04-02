@@ -1,8 +1,6 @@
 package transport;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class NorthWest {
     /** Создание исходного опорного плана задачи */
@@ -12,20 +10,7 @@ public class NorthWest {
         int[] srcTemp = Arrays.copyOf(srcWeights, srcWeights.length);
         int[] dstTemp = Arrays.copyOf(dstWeights, dstWeights.length);
         CellDistribute(table, srcTemp, dstTemp, 0, 0);
-        List<Integer> base = new ArrayList<>();     // Список перевозок
-        int totalCost = 0;    // Стоимость всех перевозок
-        for (Cell[] cells : table.getCells()) {
-            for (Cell cell : cells) {
-                if (cell.isHasTraffic()) {
-                    base.add(cell.getTraffic());
-                    totalCost += cell.getTraffic() * cell.getCost();
-                }
-            }
-        }
-        if (isDegeneracy(base.size(), table)) {
-            throw new Error("Вырожденный план: m + n - 1 != " + base.size());
-        }
-        return new Plan(table, base, totalCost);
+        return new Plan(table);
     }
     /** Рекурсивная функция распределения поставок по ячейкам */
     private static void CellDistribute(Table table, int[] srcTemp, int[] dstTemp, int src, int dst) {
@@ -58,10 +43,5 @@ public class NorthWest {
             CellDistribute(table, srcTemp, dstTemp, src + 1, dst);
         }
     }
-    /** Проверка плана на вырожденность */
-    private static boolean isDegeneracy(int baseN, Table table) {
-        // m + n - 1 = N
-        int requiredN = table.getSrcWeights().length + table.getDstWeights().length - 1;
-        return (requiredN != baseN);
-    }
+
 }

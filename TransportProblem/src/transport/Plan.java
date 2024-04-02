@@ -1,33 +1,67 @@
 package transport;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  *  Класс опорного плана
  */
 public class Plan {
-    private Table table;
-    private List<Integer> base;
+    protected Table table;
+    private int[][] traffic;
     private int totalCost;
+    private int basedCount;
+    private boolean isOptimized;
     /** Конструктор опорного плана */
-    public Plan(Table table, List<Integer> base, int totalCost) {
+    public Plan(Table table) {
         this.table = table;
-        this.base = base;
+        UpdateTraffic(table);
+    }
+    /** Обновление матрицы перевозок и ее параметров */
+    private void UpdateTraffic(Table table) {
+        int totalCost = 0;
+        int basedCount = 0;
+        int[][] traffic = new int[table.getSrcWeights().length]          // Матрица перевозок
+                                 [table.getDstWeights().length];
+        Arrays.stream(traffic).forEach(row -> Arrays.fill(row, -1)); // Заполняем -1
+        for(Cell[] cells : table.getCells()) {
+            for (Cell cell : cells) {
+                if (cell.isHasTraffic()) {
+                    traffic[cell.getX()][cell.getY()] = cell.getTraffic();
+                    totalCost += cell.getTraffic() * cell.getCost();
+                    basedCount++;
+                }
+            }
+        }
+        if (isDegeneracy(basedCount, table)) {
+            throw new Error("Вырожденный план: m + n - 1 != " + basedCount);
+        }
+        this.traffic = traffic;
         this.totalCost = totalCost;
+        this.basedCount = basedCount;
+    }
+    /** Проверка плана на вырожденность */
+    private static boolean isDegeneracy(int baseN, Table table) {
+        // m + n - 1 = N
+        int requiredN = table.getSrcWeights().length + table.getDstWeights().length - 1;
+        return (requiredN != baseN);
     }
     public Table getTable() {
         return table;
     }
-    public List<Integer> getBase() {
-        return base;
+    public int[][] getTraffic() {
+        return traffic;
+    }
+    public void setTraffic(int[][] traffic) {
+        this.traffic = traffic;
+    }
+    public int[][] getBase() {
+        return traffic;
     }
     public int getTotalCost() {
         return totalCost;
+    }
+    public void FindPotentials() {
+        Optimize.Optimizer(this);
     }
 }
