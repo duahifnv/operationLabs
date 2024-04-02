@@ -1,7 +1,6 @@
 package transport;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  *  Класс опорного плана
@@ -60,8 +59,5 @@ public class Plan {
     }
     public int getTotalCost() {
         return totalCost;
-    }
-    public void FindPotentials() {
-        Optimize.Optimizer(this);
     }
 }
