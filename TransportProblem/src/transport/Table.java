@@ -23,6 +23,9 @@ public class Table {
     public Cell[][] getCells() {
         return cells;
     }
+    public void setCell(int src, int dst, Cell cell) {
+        cells[src][dst] = cell;
+    }
     public int[] getSrcWeights() {
         return srcWeights;
     }
@@ -49,7 +52,7 @@ public class Table {
         Cell[][] table = new Cell[srcWeights.length][dstWeights.length];
         for (int i = 0; i < srcWeights.length; i++) {
             for (int j = 0; j < dstWeights.length; j++) {
-                table[i][j] = new Cell(costs[i][j]);
+                table[i][j] = new Cell(i, j, costs[i][j]);
             }
         }
         return table;
