@@ -21,4 +21,12 @@ public class Transport {
     public void PrintTotalCost() {
         System.out.println("Стоимость перевозок: " + plan.getTotalCost());
     }
+    public void Optimize() {
+        Optimizer optimizer = new Optimizer(plan);
+        optimizer.FindPotentials();
+        if(optimizer.FindMinDelta() >= 0) {
+            System.out.println("Минимальная дельта оценка >= 0. План оптимален");
+        }
+        optimizer.RecalcPlan();
+    }
 }
