@@ -6,6 +6,7 @@ class Cell {
     private final int y;
     private int traffic;
     private boolean hasTraffic;
+    private int delta;
     public Cell(int x, int y, int cost) {
         this.x = x;
         this.y = y;
@@ -33,5 +34,11 @@ class Cell {
     }
     public int getY() {
         return y;
+    }
+    public void setDelta(int delta) {
+        this.delta = delta;
+    }
+    public int getDelta() {
+        return delta;
     }
 }
