@@ -1,7 +1,5 @@
 package transport;
 
-import java.util.Arrays;
-
 /**
  *  Класс опорного плана
  */
