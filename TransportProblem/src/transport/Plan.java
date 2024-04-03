@@ -7,14 +7,14 @@ public class Plan {
     protected Table table;
     private int totalCost;
     private int basedCount;
-    private boolean isOptimized;
+    private boolean optimized;
     /** Конструктор опорного плана */
     public Plan(Table table) {
         this.table = table;
-        UpdateTraffic(table);
+        UpdateTraffic();
     }
     /** Обновление матрицы перевозок и ее параметров */
-    private void UpdateTraffic(Table table) {
+    public void UpdateTraffic() {
         int totalCost = 0;
         int basedCount = 0;
         for(Cell[] cells : table.getCells()) {
@@ -48,5 +48,8 @@ public class Plan {
     }
     public void setBasedCount(int basedCount) {
         this.basedCount = basedCount;
+    }
+    public void setOptimized(boolean optimized) {
+        this.optimized = optimized;
     }
 }
