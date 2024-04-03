@@ -7,7 +7,6 @@ import java.util.Arrays;
  */
 public class Plan {
     protected Table table;
-    private int[][] traffic;
     private int totalCost;
     private int basedCount;
     private boolean isOptimized;
@@ -20,13 +19,9 @@ public class Plan {
     private void UpdateTraffic(Table table) {
         int totalCost = 0;
         int basedCount = 0;
-        int[][] traffic = new int[table.getSrcWeights().length]          // Матрица перевозок
-                                 [table.getDstWeights().length];
-        Arrays.stream(traffic).forEach(row -> Arrays.fill(row, -1)); // Заполняем -1
         for(Cell[] cells : table.getCells()) {
             for (Cell cell : cells) {
                 if (cell.isHasTraffic()) {
-                    traffic[cell.getX()][cell.getY()] = cell.getTraffic();
                     totalCost += cell.getTraffic() * cell.getCost();
                     basedCount++;
                 }
@@ -35,7 +30,6 @@ public class Plan {
         if (isDegeneracy(basedCount, table)) {
             throw new Error("Вырожденный план: m + n - 1 != " + basedCount);
         }
-        this.traffic = traffic;
         this.totalCost = totalCost;
         this.basedCount = basedCount;
     }
@@ -48,16 +42,13 @@ public class Plan {
     public Table getTable() {
         return table;
     }
-    public int[][] getTraffic() {
-        return traffic;
-    }
-    public void setTraffic(int[][] traffic) {
-        this.traffic = traffic;
-    }
-    public int[][] getBase() {
-        return traffic;
-    }
     public int getTotalCost() {
         return totalCost;
+    }
+    public int getBasedCount() {
+        return basedCount;
+    }
+    public void setBasedCount(int basedCount) {
+        this.basedCount = basedCount;
     }
 }
