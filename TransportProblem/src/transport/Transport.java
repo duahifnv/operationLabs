@@ -1,7 +1,7 @@
 package transport;
 
 /**
- *  Класс для решения транспортной задачи
+ *  Класс для решения транспортной задачи (v1.0)
  */
 public class Transport {
     private int[] srcWeights;
