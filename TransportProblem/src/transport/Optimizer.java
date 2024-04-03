@@ -1,9 +1,6 @@
 package transport;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -93,9 +90,14 @@ public class Optimizer {
                     .collect(Collectors.joining("->"));
             System.out.println("Цикл перестановок: " + formatCycle);
         }
-        Cell nearestLeft = cycle.get(cycle.size() - 2);
-        Cell nearestRight = cycle.get(1);
-        int lambda = Math.min(nearestLeft.getTraffic(), nearestRight.getTraffic());
+        int idx = 0;
+        int lambda = Integer.MAX_VALUE;
+        for (Cell cell : cycle) {
+            if (idx % 2 != 0) {
+                lambda = Math.min(lambda, cell.getTraffic());
+            }
+            idx++;
+        }
         boolean degeneracy = true;  // Флаг вырожденности плана (добавляется новая ячейка)
         for (int i = 0; i < cycle.size() - 1; i++) {
             Cell cell = cycle.get(i);
