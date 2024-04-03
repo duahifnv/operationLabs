@@ -15,8 +15,8 @@ public class Transport {
         this.plan = NorthWest.CreateSourcePlan(new Table(srcWeights, dstWeights, costs));
     }
     /** Вывод таблицы в консоль */
-    public void PrintTable() {
-        Print.PrintTable(plan.getTable());
+    public void PrintTable(String title) {
+        Print.PrintTable(plan.getTable(), title);
     }
     public void PrintTotalCost() {
         System.out.println("Стоимость перевозок: " + plan.getTotalCost());
@@ -24,9 +24,12 @@ public class Transport {
     public void Optimize() {
         Optimizer optimizer = new Optimizer(plan);
         optimizer.FindPotentials();
-        if(optimizer.FindMinDelta() >= 0) {
+        if (optimizer.FindMinDelta() >= 0) {
             System.out.println("Минимальная дельта оценка >= 0. План оптимален");
         }
-        optimizer.RecalcPlan();
+        else {
+            System.out.println("**Пересчет плана**");
+            optimizer.RecalcPlan();
+        }
     }
 }

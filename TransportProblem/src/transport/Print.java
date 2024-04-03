@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
  */
 public class Print {
     /** Сборка и вывод таблицы в консоль */
-    public static void PrintTable(Table table) {
+    public static void PrintTable(Table table, String title) {
         int[] srcWeights = table.getSrcWeights();
         int[] dstWeights = table.getDstWeights();
         Cell[][] cells = table.getCells();
@@ -27,6 +27,6 @@ public class Print {
             params.add(row);
         }
         utils.Table.PrintTable(labels.size(), labels, params,
-                "Исходный опорный план", Collections.nCopies(labels.size(), 10));
+                title, Collections.nCopies(labels.size(), 10));
     }
 }
