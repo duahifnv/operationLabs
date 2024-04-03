@@ -77,7 +77,7 @@ public class Optimizer {
                 }
             }
         }
-        System.out.printf("Минимальная дельта оценка: %d (Δ%d%d)%n", minDelta,
+        System.out.printf("Минимальная дельта оценка: %d (delta%d%d)%n", minDelta,
                 worstDelta.getX() + 1, worstDelta.getY() + 1);
         return minDelta;
     }
