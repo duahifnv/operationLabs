@@ -16,6 +16,10 @@ public class CycleFinder {
                 if (cycle.contains(nearestCell)) {
                     // Если пришли в начальную ячейку
                     if (nearestCell == cycle.getFirst()) {
+                        // Убираем из цикла ячейку-посредника на линии
+                        if (dir == prevDir) {
+                            cycle.remove(cell);
+                        }
                         // Цикл существует
                         if (cycle.size() % 2 == 0 && cycle.size() >= 4) {
                             cycle.add(nearestCell);
