@@ -103,7 +103,7 @@ public class Optimizer {
             Cell cell = cycle.get(i);
             int sign = (i % 2 == 0) ? 1 : -1;
             cell.addLambda(lambda * sign);
-            if (cell.getTraffic() == 0 && degeneracy) {
+            if (cell.getTraffic() == 0 && degeneracy && cell != worstDelta) {
                 cell.removeTraffic();
                 degeneracy = false; // План больше не вырожден
             }
