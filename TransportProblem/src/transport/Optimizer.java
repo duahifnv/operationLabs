@@ -89,5 +89,18 @@ public class Optimizer {
                     .collect(Collectors.joining("->"));
             System.out.println("Цикл перестановок: " + formatCycle);
         }
+        Cell nearestLeft = cycle.get(cycle.size() - 2);
+        Cell nearestRight = cycle.get(1);
+        int lambda = Math.min(nearestLeft.getTraffic(), nearestRight.getTraffic());
+        // List<Cell> zeroTraffics = new ArrayList<>();
+        for (int i = 0; i < cycle.size() - 1; i++) {
+            Cell cell = cycle.get(i);
+            int sign = (i % 2 == 0) ? 1 : -1;
+            cell.addLambda(lambda * sign);
+            /*if (cell.getTraffic() == 0) {
+                zeroTraffics.add(cell);
+
+            }*/
+        }
     }
 }

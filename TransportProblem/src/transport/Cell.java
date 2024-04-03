@@ -16,6 +16,10 @@ class Cell {
         this.traffic = traffic;
         this.hasTraffic = true;
     }
+    public void addLambda(int lambda) {
+        this.traffic += lambda;
+        this.hasTraffic = true;
+    }
     public boolean isHasTraffic() {
         return hasTraffic;
     }
