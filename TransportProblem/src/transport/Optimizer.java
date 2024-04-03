@@ -24,40 +24,44 @@ public class Optimizer {
     public void FindPotentials() {
         Cell[][] cells = table.getCells();
         int[][] costs = table.getCosts();
-        int[] srcPotentials = new int[table.getSrcWeights().length];
-        int[] dstPotentials = new int[table.getDstWeights().length];
-        List<Integer> unassignedSrcIdx =  new ArrayList<>(IntStream.range(1, srcPotentials.length)
-                .boxed().toList());
-        List<Integer> unassignedDstIdx = new ArrayList<>(IntStream.range(0, dstPotentials.length)
-                .boxed().toList());
-        // Проход по строкам таблицы
+        Integer[] srcPotentials = new Integer[table.getSrcWeights().length];
+        Integer[] dstPotentials = new Integer[table.getDstWeights().length];
+        List<Equation> unsolved = new ArrayList<>();
         for (int i = 0; i < cells.length; i++) {
-            // Если все потенциалы столцов и потенциал строки найдены -> пропуск
-            if (unassignedDstIdx.size() == 0 && !unassignedSrcIdx.contains(i)) {
-                continue;
-            }
-            // Проход по столбцам таблицы
-            for (int j = 0; j < cells[i].length; j++) {
-                // Если все потенциалы строки и потенциал столбца найдены -> пропуск
-                if (unassignedSrcIdx.size() == 0 && !unassignedDstIdx.contains(j)) {
-                    continue;
-                }
-                // Если в ячейке есть трафик - находим потенциал столбца
+            for(int j = 0; j < cells[0].length; j++) {
                 if (cells[i][j].isHasTraffic()) {
-                    dstPotentials[j] = costs[i][j] - srcPotentials[i];
-                    unassignedDstIdx.remove(Integer.valueOf(j));
-                    // Находим потенциалы ненайденных строк по столбцу
-                    for(int row : List.copyOf(unassignedSrcIdx)) {
-                        if (cells[row][j].isHasTraffic()) {
-                            srcPotentials[row] = costs[row][j] - dstPotentials[j];
-                            unassignedSrcIdx.remove((Integer)row);
-                        }
-                    }
+                    unsolved.add(new Equation(i, j, costs[i][j]));
                 }
             }
         }
-        this.srcPotentials = srcPotentials;
-        this.dstPotentials = dstPotentials;
+        // Решаем первое уравнение, т.к. u1 = 0
+        Equation firstEq = unsolved.getFirst();
+        firstEq.u = 0;
+        firstEq.v = firstEq.d - firstEq.u;
+        unsolved.remove(firstEq);
+        srcPotentials[0] = firstEq.u;
+        dstPotentials[0] = firstEq.v;
+        // Решаем оставшиеся уравнения
+        while (unsolved.size() > 0) {
+            for (Equation equation : List.copyOf(unsolved)) {
+                // u + ? = d
+                if (srcPotentials[equation.uIdx] != null) {
+                    equation.v = equation.d - srcPotentials[equation.uIdx];
+                    dstPotentials[equation.vIdx] = equation.v;
+                }
+                // ? + v = d
+                if (dstPotentials[equation.vIdx] != null) {
+                    equation.u = equation.d - dstPotentials[equation.vIdx];
+                    srcPotentials[equation.uIdx] = equation.u;
+                }
+                // u + v = d -> Уравнение решено
+                if (equation.u != null && equation.v != null) {
+                    unsolved.remove(equation);
+                }
+            }
+        }
+        this.srcPotentials = Arrays.stream(srcPotentials).mapToInt(Integer::intValue).toArray();
+        this.dstPotentials = Arrays.stream(dstPotentials).mapToInt(Integer::intValue).toArray();
         System.out.println("Потенциалы поставщиков: " + Arrays.toString(srcPotentials));
         System.out.println("Потенциалы потребителей: " + Arrays.toString(dstPotentials));
     }
