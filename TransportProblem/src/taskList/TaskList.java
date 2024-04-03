@@ -15,9 +15,14 @@ public class TaskList {
                          {1, 2, 1, 3, 1},
                          {2, 1, 3, 3, 1}};
         Transport transport = new Transport(srcWeights, dstWeights, costs);
+        int maxRecounts = 10;
         transport.PrintTable("Исходный опорный план");
         transport.PrintTotalCost();
-        transport.Optimize();
-        transport.PrintTable("Опорный план после оптимизации");
+        for (int i = 0; i < maxRecounts; i++) {
+            if (transport.isOptimized()) break;
+            transport.RecalcPlan();
+            transport.PrintTable("Опорный план после оптимизации");
+            transport.PrintTotalCost();
+        }
     }
 }
