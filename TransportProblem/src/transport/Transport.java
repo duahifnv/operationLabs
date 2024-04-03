@@ -8,6 +8,7 @@ public class Transport {
     private int[] dstWeights;
     private int[][] costs;
     private Plan plan;
+    private Optimizer optimizer;
     public Transport(int[] srcWeights, int[] dstWeights, int[][] costs) {
         this.srcWeights = srcWeights;
         this.dstWeights = dstWeights;
@@ -21,15 +22,19 @@ public class Transport {
     public void PrintTotalCost() {
         System.out.println("Стоимость перевозок: " + plan.getTotalCost());
     }
-    public void Optimize() {
-        Optimizer optimizer = new Optimizer(plan);
+    public boolean isOptimized() {
+        this.optimizer = new Optimizer(plan);
         optimizer.FindPotentials();
         if (optimizer.FindMinDelta() >= 0) {
             System.out.println("Минимальная дельта оценка >= 0. План оптимален");
+            plan.setOptimized(true);
+            return true;
         }
-        else {
-            System.out.println("**Пересчет плана**");
-            optimizer.RecalcPlan();
-        }
+        return false;
+    }
+    public void RecalcPlan() {
+        System.out.println("**Пересчет плана**");
+        optimizer.RecalcPlan();
+        plan.UpdateTraffic();
     }
 }
