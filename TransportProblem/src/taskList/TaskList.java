@@ -3,6 +3,24 @@ package taskList;
 import transport.*;
 
 public class TaskList {
+    public static void task1() {
+        // Вариант 1
+        int[] srcWeights = {200, 150, 350};
+        int[] dstWeights = {120, 120, 200, 180, 110};
+        int[][] costs = {{1, 2, 3, 5, 2},
+                        {4, 6, 7, 3, 1},
+                        {2, 2, 3, 4, 5}};
+        Solver.Solve(srcWeights, dstWeights, costs);
+    }
+    public static void task3() {
+        // Вариант 3+ (Руками = 2620)
+        int[] srcWeights = {180, 300, 230};
+        int[] dstWeights = {110, 140, 220, 190, 120};
+        int[][] costs = {{2, 4, 5, 8, 6},
+                         {7, 3, 6, 4, 5},
+                         {8, 5, 6, 5, 3}};
+        Solver.Solve(srcWeights, dstWeights, costs);
+    }
     public static void task5() {
         // Вариант 5
         int[] srcWeights = {100, 300, 150};
@@ -46,6 +64,13 @@ public class TaskList {
         int[][] costs = {{1, 4, 5, 3, 1},
                 {2, 1, 2, 1, 2},
                 {3, 1, 4, 2, 1}};
+        Solver.Solve(srcWeights, dstWeights, costs);
+    }
+    public static void task0() {
+        // Вариант 12+
+        int[] srcWeights = {200, 150, 35};
+        int[] dstWeights = {120, 130, 130, 180, 110};
+        int[][] costs = {{1, 4, 7, 8, 1}, {2, 3, 1, 4, 1}, {5, 1, 3, 2, 3}};
         Solver.Solve(srcWeights, dstWeights, costs);
     }
 }
