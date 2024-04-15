@@ -12,6 +12,15 @@ public class TaskList {
                         {2, 2, 3, 4, 5}};
         Solver.Solve(srcWeights, dstWeights, costs);
     }
+    public static void task2() {
+        // Вариант 2
+        int[] srcWeights = {250, 200, 220};
+        int[] dstWeights = {140, 110, 170, 90, 140};
+        int[][] costs = {{4, 3, 4, 5, 3},
+                {2, 4, 5, 7, 8},
+                {4, 3, 7, 2, 1}};
+        Solver.Solve(srcWeights, dstWeights, costs);
+    }
     public static void task3() {
         // Вариант 3+ (Руками = 2620)
         int[] srcWeights = {180, 300, 230};
@@ -22,7 +31,7 @@ public class TaskList {
         Solver.Solve(srcWeights, dstWeights, costs);
     }
     public static void task5() {
-        // Вариант 5
+        // Вариант 5 (Руками = 720)
         int[] srcWeights = {100, 300, 150};
         int[] dstWeights = {110, 200, 90, 100, 120};
         int[][] costs = {{5, 2, 3, 6, 1},
