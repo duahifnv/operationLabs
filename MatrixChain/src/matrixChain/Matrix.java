@@ -1,14 +1,8 @@
 package matrixChain;
 
-public record Matrix(int[][] matrix) {
-    public int rows() {
-        return matrix.length;
-    }
-    public int cols() {
-        return matrix[0].length;
-    }
+public record Matrix(int rows, int cols) {
     @Override
     public String toString() {
-        return "Матрица " + rows() + " x " + cols();
+        return "Матрица " + rows + " x " + cols;
     }
 }
