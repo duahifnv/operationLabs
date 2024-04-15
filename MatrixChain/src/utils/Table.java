@@ -3,7 +3,7 @@ package utils;
 import java.util.List;
 
 public class Table {
-    public static void PrintTable(int n_columns, List<String> labels,
+    public static void printTable(int n_columns, List<String> labels,
                                   List<List<String>> params, String title, List<Integer> fieldSizes) {
         System.out.println(title);
         if (labels.size() != n_columns || fieldSizes.size() != n_columns) {
