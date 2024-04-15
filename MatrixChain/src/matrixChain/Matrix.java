@@ -1,3 +1,5 @@
+package matrixChain;
+
 public record Matrix(int[][] matrix) {
     public int rows() {
         return matrix.length;

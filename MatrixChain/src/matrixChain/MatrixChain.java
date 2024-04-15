@@ -1,3 +1,5 @@
+package matrixChain;
+
 import utils.Table;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class MatrixChain {
     }
     public void calcOptimal() {
         int n = tableSize;
-        // Fill main diagonals with zeros
+        // Заполняем главные диагонали нулями
         for (int i = 0; i < n; i++) {
             minScalars[i][i] = 0;
             optIndices[i][i] = 0;
