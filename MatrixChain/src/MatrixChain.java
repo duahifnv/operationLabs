@@ -1,11 +1,18 @@
+import utils.Table;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * <h2>Умножение цепочки матриц (МСОР)</h2>
  * <h3>Задача оптимизации</h3>
  */
 public class MatrixChain {
-    private final int[] vector;
+    public final int[] vector;
     private Integer[][] minScalars;
     private Integer[][] optIndices;
+    private final int tableSize;
     public MatrixChain(Matrix[] matrices) {
         this.vector = new int[matrices.length + 1];
         vector[0] = matrices[0].rows();
@@ -18,12 +25,10 @@ public class MatrixChain {
         vector[vector.length - 1] = matrices[matrices.length - 1].cols();
         minScalars = new Integer[matrices.length][matrices.length];
         optIndices = new Integer[matrices.length][matrices.length];
-    }
-    public int[] getVector() {
-        return vector;
+        tableSize = matrices.length;
     }
     public void calcOptimal() {
-        int n = vector.length - 1;
+        int n = tableSize;
         // Fill main diagonals with zeros
         for (int i = 0; i < n; i++) {
             minScalars[i][i] = 0;
@@ -43,6 +48,32 @@ public class MatrixChain {
                 }
             }
         }
+        printTable(minScalars, "Матрица минимальных скаляров");
+        printTable(optIndices, "Матрица оптимальных индексов");
     }
-
+    private void printTable(Integer[][] matrix, String title) {
+        List<String> labels = new ArrayList<>();
+        for (int i = 0; i < tableSize; i++) {
+            labels.add(String.valueOf(i + 1));
+        }
+        labels.add(0, "i/j");
+        List<List<String>> params = new ArrayList<>();
+        for (int i = 0; i < tableSize; i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < tableSize; j++) {
+                if (matrix[i][j] == null) {
+                    row.add("-");
+                }
+                else row.add(matrix[i][j].toString());
+            }
+            row.add(0, String.valueOf(i + 1));
+            params.add(row);
+        }
+        int n_columns = tableSize + 1;
+        Table.printTable(n_columns,
+                        labels,
+                        params,
+                        title,
+                        Collections.nCopies(n_columns, 10));
+    }
 }
