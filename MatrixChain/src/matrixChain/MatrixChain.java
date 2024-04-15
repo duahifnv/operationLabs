@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class MatrixChain {
     public final int[] vector;
-    private Integer[][] minScalars;
-    private Integer[][] optIndices;
+    private final Integer[][] minScalars;
+    private final Integer[][] optIndices;
     private final int tableSize;
     public MatrixChain(Matrix[] matrices) {
         this.vector = new int[matrices.length + 1];
