@@ -28,8 +28,9 @@ public class MatrixChain {
         minScalars = new Integer[matrices.length][matrices.length];
         optIndices = new Integer[matrices.length][matrices.length];
         tableSize = matrices.length;
+        calcOptimal();
     }
-    public void calcOptimal() {
+    private void calcOptimal() {
         int n = tableSize;
         // Заполняем главные диагонали нулями
         for (int i = 0; i < n; i++) {
@@ -45,7 +46,7 @@ public class MatrixChain {
                             + vector[i] * vector[k+1] * vector[j+1];
                     if (value < minScalars[i][j]) {
                         minScalars[i][j] = value;
-                        optIndices[i][j] = k + 1;
+                        optIndices[i][j] = k;
                     }
                 }
             }
@@ -66,7 +67,7 @@ public class MatrixChain {
                 if (matrix[i][j] == null) {
                     row.add("-");
                 }
-                else row.add(matrix[i][j].toString());
+                else row.add(String.valueOf(matrix[i][j]));
             }
             row.add(0, String.valueOf(i + 1));
             params.add(row);
@@ -77,5 +78,25 @@ public class MatrixChain {
                         params,
                         title,
                         Collections.nCopies(n_columns, 10));
+    }
+    private String getChain() {
+        StringBuilder chain = new StringBuilder();
+        buildChain(chain, 0, tableSize - 1);
+        return chain.toString();
+    }
+    private void buildChain(StringBuilder chain, int i, int j) {
+        if (i == j) {
+            chain.append("A").append(i+1);
+        }
+        else {
+            chain.append("(");
+            buildChain(chain, optIndices[i][j] + 1, j);
+            buildChain(chain, i, optIndices[i][j]);
+            chain.append(")");
+        }
+    }
+    @Override
+    public String toString() {
+        return "Оптимальная расстанока скобок: " + getChain();
     }
 }
