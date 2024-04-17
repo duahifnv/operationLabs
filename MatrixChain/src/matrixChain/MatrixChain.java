@@ -15,19 +15,19 @@ public class MatrixChain {
     private final Integer[][] minScalars;
     private final Integer[][] optIndices;
     private final int tableSize;
-    public MatrixChain(Matrix[] matrices) {
-        this.vector = new int[matrices.length + 1];
-        vector[0] = matrices[0].rows();
+    public MatrixChain(ArrayList<Matrix> matrices) {
+        this.vector = new int[matrices.size() + 1];
+        vector[0] = matrices.get(0).rows();
         for (int i = 1; i < vector.length - 1; i++) {
-            if (matrices[i].rows() != matrices[i - 1].cols()) {
+            if (matrices.get(i).rows() != matrices.get(i - 1).cols()) {
                 throw new ArithmeticException("Несовместимые размеры");
             }
-            vector[i] = matrices[i].rows();
+            vector[i] = matrices.get(i).rows();
         }
-        vector[vector.length - 1] = matrices[matrices.length - 1].cols();
-        minScalars = new Integer[matrices.length][matrices.length];
-        optIndices = new Integer[matrices.length][matrices.length];
-        tableSize = matrices.length;
+        vector[vector.length - 1] = matrices.getLast().cols();
+        minScalars = new Integer[matrices.size()][matrices.size()];
+        optIndices = new Integer[matrices.size()][matrices.size()];
+        tableSize = matrices.size();
         calcOptimal();
     }
     private void calcOptimal() {
