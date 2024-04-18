@@ -15,7 +15,7 @@ public class MatrixChain {
     private final Integer[][] minScalars;
     private final Integer[][] optIndices;
     private final int tableSize;
-    public MatrixChain(ArrayList<Matrix> matrices) {
+    public MatrixChain(ArrayList<MatrixSize> matrices) {
         this.vector = new int[matrices.size() + 1];
         vector[0] = matrices.get(0).rows();
         for (int i = 1; i < vector.length - 1; i++) {
