@@ -1,4 +1,5 @@
 import matrixChain.Matrix;
+import matrixChain.MatrixMultiply;
 import matrixChain.MatrixSize;
 import matrixChain.MatrixChain;
 import utils.json.JSONmanager;
@@ -19,6 +20,8 @@ public class Main {
             matrices.add(new Matrix(matrixSize.rows(), matrixSize.cols(), -10, 10));
         }
         System.out.println(matrices.get(0));
-        // System.out.println(matrixChain);
+        System.out.println(matrices.get(1));
+        System.out.println(MatrixMultiply.multiply(matrices.get(0), matrices.get(1)));
+        System.out.println(matrixChain);
     }
 }
