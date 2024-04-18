@@ -79,7 +79,7 @@ public class MatrixChain {
                         title,
                         Collections.nCopies(n_columns, 10));
     }
-    private String getChain() {
+    public String getChain() {
         StringBuilder chain = new StringBuilder();
         buildChain(chain, 0, tableSize - 1);
         return chain.toString();
@@ -90,8 +90,8 @@ public class MatrixChain {
         }
         else {
             chain.append("(");
-            buildChain(chain, optIndices[i][j] + 1, j);
             buildChain(chain, i, optIndices[i][j]);
+            buildChain(chain, optIndices[i][j] + 1, j);
             chain.append(")");
         }
     }
