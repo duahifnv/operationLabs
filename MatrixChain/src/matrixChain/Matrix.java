@@ -36,6 +36,6 @@ public class Matrix {
     }
     @Override
     public String toString() {
-        return "Матрица: " + Arrays.deepToString(matrix);
+        return "Матрица: (" + rows() + "x" + cols() + ") " + Arrays.deepToString(matrix);
     }
 }
