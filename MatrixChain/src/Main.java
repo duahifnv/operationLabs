@@ -1,4 +1,5 @@
 import matrixChain.Matrix;
+import matrixChain.MatrixSize;
 import matrixChain.MatrixChain;
 import utils.json.JSONmanager;
 import java.util.ArrayList;
@@ -10,9 +11,14 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args){
-        String jsonPath = "D:\\DSTU\\operationLabs\\MatrixChain\\json\\me.json";
-        ArrayList<Matrix> matrices = JSONmanager.parse(jsonPath, Matrix.class);
-        MatrixChain matrixChain = new MatrixChain(matrices);
-        System.out.println(matrixChain);
+        String jsonPath = "D:\\DSTU\\operationLabs\\MatrixChain\\json\\handsolved.json";
+        ArrayList<MatrixSize> matricesSizes = JSONmanager.parse(jsonPath, MatrixSize.class);
+        MatrixChain matrixChain = new MatrixChain(matricesSizes);
+        ArrayList<Matrix> matrices = new ArrayList<>();
+        for (MatrixSize matrixSize : matricesSizes) {
+            matrices.add(new Matrix(matrixSize.rows(), matrixSize.cols(), -10, 10));
+        }
+        System.out.println(matrices.get(0));
+        // System.out.println(matrixChain);
     }
 }
