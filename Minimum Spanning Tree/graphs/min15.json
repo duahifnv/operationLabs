@@ -1,0 +1,52 @@
+[
+  {
+    "from": 0,
+    "to": 1,
+    "weight": 5
+  },
+  {
+    "from": 0,
+    "to": 4,
+    "weight": 6
+  },
+  {
+    "from": 0,
+    "to": 5,
+    "weight": 1
+  },
+  {
+    "from": 1,
+    "to": 2,
+    "weight": 2
+  },
+  {
+    "from": 1,
+    "to": 5,
+    "weight": 5
+  },
+  {
+    "from": 2,
+    "to": 3,
+    "weight": 6
+  },
+  {
+    "from": 2,
+    "to": 5,
+    "weight": 4
+  },
+  {
+    "from": 3,
+    "to": 4,
+    "weight": 3
+  },
+  {
+    "from": 3,
+    "to": 5,
+    "weight": 6
+  },
+  {
+    "from": 4,
+    "to": 5,
+    "weight": 5
+  }
+]
