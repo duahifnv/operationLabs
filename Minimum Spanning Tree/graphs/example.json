@@ -1,0 +1,27 @@
+[
+  {
+    "from": 1,
+    "to": 2,
+    "weight": 2
+  },
+  {
+    "from": 1,
+    "to": 4,
+    "weight": 2
+  },
+  {
+    "from": 4,
+    "to": 5,
+    "weight": 6
+  },
+  {
+    "from": 2,
+    "to": 4,
+    "weight": 3
+  },
+  {
+    "from": 2,
+    "to": 5,
+    "weight": 5
+  }
+]
