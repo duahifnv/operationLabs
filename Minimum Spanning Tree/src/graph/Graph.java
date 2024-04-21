@@ -22,6 +22,13 @@ public class Graph {
     public List<Integer> vertexes() {
         return vertexes;
     }
+    public int weight() {
+        int weight = 0;
+        for (Edge edge : edges) {
+            weight += edge.weight();
+        }
+        return weight;
+    }
     @Override
     public String toString() {
         return "Граф: " +
