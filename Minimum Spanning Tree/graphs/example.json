@@ -1,18 +1,33 @@
 [
   {
-    "from": 1,
-    "to": 2,
+    "from": 0,
+    "to": 1,
     "weight": 2
+  },
+  {
+    "from": 0,
+    "to": 3,
+    "weight": 2
+  },
+  {
+    "from": 3,
+    "to": 4,
+    "weight": 6
+  },
+  {
+    "from": 1,
+    "to": 3,
+    "weight": 3
   },
   {
     "from": 1,
     "to": 4,
-    "weight": 2
+    "weight": 5
   },
   {
-    "from": 4,
-    "to": 5,
-    "weight": 6
+    "from": 1,
+    "to": 2,
+    "weight": 5
   },
   {
     "from": 2,
@@ -22,6 +37,16 @@
   {
     "from": 2,
     "to": 5,
-    "weight": 5
+    "weight": 4
+  },
+  {
+    "from": 3,
+    "to": 6,
+    "weight": 7
+  },
+  {
+    "from": 4,
+    "to": 6,
+    "weight": 8
   }
 ]
