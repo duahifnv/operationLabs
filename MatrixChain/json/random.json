@@ -1,42 +1,26 @@
 [
     {
-      "rows": 7,
-      "cols": 12
+      "rows": 5,
+      "cols": 10
     },
     {
-      "rows": 12,
-      "cols": 8
+      "rows": 10,
+      "cols": 3
     },
     {
-      "rows": 8,
+      "rows": 3,
       "cols": 6
     },
     {
       "rows": 6,
-      "cols": 15
+      "cols": 9
     },
     {
-      "rows": 15,
-      "cols": 10
+      "rows": 9,
+      "cols": 4
     },
     {
-      "rows": 10,
-      "cols": 8
-    },
-    {
-      "rows": 8,
-      "cols": 14
-    },
-    {
-      "rows": 14,
-      "cols": 10
-    },
-    {
-      "rows": 10,
-      "cols": 8
-    },
-    {
-      "rows": 8,
-      "cols": 11
+      "rows": 4,
+      "cols": 2
     }
 ]
