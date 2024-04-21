@@ -31,20 +31,20 @@ public class Ostov {
         }
         graph.edges().sort(Comparator.comparingInt(Edge::weight));
         for (Edge edge : graph.edges()) {
-            if (find(edge.from(), ftr) != find(edge.to(), ftr)) {
+            if (root(edge.from(), ftr) != root(edge.to(), ftr)) {
                 minEdges.add(edge);
                 union(
-                        find(edge.from(), ftr),
-                        find(edge.to(), ftr),
+                        root(edge.from(), ftr),
+                        root(edge.to(), ftr),
                         ftr,
                         rank);
             }
         }
         return new Graph(minEdges);
     }
-    private static int find(int i, int[] ftr) {
+    private static int root(int i, int[] ftr) {
         if (i != ftr[i]) {
-            ftr[i] = find(ftr[i], ftr);
+            ftr[i] = root(ftr[i], ftr);
         }
         return ftr[i];
     }
