@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,10 +16,15 @@ public class Graph {
         }
         this.vertexes = vertexes.stream().toList();
     }
-    public List<Edge> getEdges() {
+    public List<Edge> edges() {
         return edges;
     }
-    public List<Integer> getVertexes() {
+    public List<Integer> vertexes() {
         return vertexes;
+    }
+    @Override
+    public String toString() {
+        return "Граф: " +
+                Arrays.deepToString(edges.toArray());
     }
 }
