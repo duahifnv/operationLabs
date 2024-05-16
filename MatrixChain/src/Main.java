@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        String jsonPath = "D:\\DSTU\\operationLabs\\MatrixChain\\json\\random.json";
+        String jsonPath = "D:\\DSTU\\operationLabs\\MatrixChain\\json\\handsolved.json";
         ArrayList<MatrixSize> matricesSizes = JSONmanager.parse(jsonPath, MatrixSize.class);
         MatrixChain matrixChain = new MatrixChain(matricesSizes);
         ArrayList<Matrix> matrices = new ArrayList<>();

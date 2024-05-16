@@ -72,6 +72,7 @@ public class MatrixMultiply {
             multiplyCounter += multiplied.first;
             multiplyQueue.addFirst(multiplied.second);
         }
+        System.out.println("Число перемножений: " + multiplyCounter);
         return multiplyQueue.pop();
     }
     private static boolean isSwapped(Matrix A, Matrix B) {

@@ -26,7 +26,7 @@ public class Print {
             }
             params.add(row);
         }
-        utils.Table.PrintTable(labels.size(), labels, params,
+        utils.Table.printTable(labels.size(), labels, params,
                 title, Collections.nCopies(labels.size(), 10));
     }
 }
